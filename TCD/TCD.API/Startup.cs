@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using TCD.API.Data;
+using TCD.API.Middleware;
 
 namespace TCD.API
 {
@@ -23,8 +24,8 @@ namespace TCD.API
         {
 
             services.AddControllers();
-            services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("Default")));
-            services.AddScoped<IProductRepository, ProductRepository>();
+            IoC.AddDependency(services);
+            services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("Default")));            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TCD.API", Version = "v1" });

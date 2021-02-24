@@ -13,63 +13,48 @@ namespace TCD.API.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductRepository _repo;
-        public ProductsController(IProductRepository repo)
+        private readonly IRepository<Product> _genericRepository;
+        private readonly IUnitOfWork _unitOfWork;
+
+        public ProductsController(IRepository<Product> Repository, IUnitOfWork unitOfWork)
         {
-            _repo = repo;
-        }
-
-
-        [HttpPost]
-        public async Task<IActionResult> CreateProduct(Product product)
-        {
-            _repo.CreateProduct(product);
-            if (await _repo.SaveAll())
-            {
-                return Ok();
-            }
-
-            throw new Exception("Creating the new product failed on save");
+            _genericRepository = Repository;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProducts()
+        public async Task<IEnumerable<Product>> Get()
         {
-            var products = await _repo.GetProducts();
-
-            return Ok(products);
+            return await _genericRepository.GetAsync();
         }
 
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetProduct(int id)
+        [HttpPost]
+        public async Task<IActionResult> Create(Product product)
         {
-            var product = await _repo.GetProduct(id);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
 
-            return Ok(product);
-        }
+            var created = await _genericRepository.CreateAsync(product);
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> EditProduct(int id, Product product)
-        {
-            var productEdited = await _repo.EditProduct(id, product);
+            if (created)
+                _unitOfWork.Commit();
 
-            return Ok(productEdited);
+            return Created("Created", new { Response = StatusCode(201) });
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
-            var productFromRepo = await _repo.GetProduct(id);
+            var deleted = await _genericRepository.Delete(id);
 
-            if (productFromRepo != null)
-                _repo.DeleteProduct(id);
+            if (deleted)
+                _unitOfWork.Commit();
 
-            if (await _repo.SaveAll())
-                return Ok();
-
-            return BadRequest("Failed to delete the photo");
+            return Ok();
 
         }
+
     }
 }
