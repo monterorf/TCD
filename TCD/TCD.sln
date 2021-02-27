@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCD.API", "TCD.API\TCD.API.csproj", "{8C957AA6-DB21-413D-A456-F13FA366B5D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCD.API", "TCD.API\TCD.API.csproj", "{8C957AA6-DB21-413D-A456-F13FA366B5D9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{96BF7BD4-4C63-4E3F-8D28-F9825F490BBD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{266D1957-7E09-44E3-BCFF-A11284B41C71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCD.Data", "TCD.Data\TCD.Data.csproj", "{F4BE3734-4F36-467F-BF95-533C2D57C678}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCD.Data.Models", "TCD.Data.Models\TCD.Data.Models.csproj", "{D4566CCE-0A47-4C56-8605-340D96E1E72F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +23,22 @@ Global
 		{8C957AA6-DB21-413D-A456-F13FA366B5D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C957AA6-DB21-413D-A456-F13FA366B5D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C957AA6-DB21-413D-A456-F13FA366B5D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4BE3734-4F36-467F-BF95-533C2D57C678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4BE3734-4F36-467F-BF95-533C2D57C678}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4BE3734-4F36-467F-BF95-533C2D57C678}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4BE3734-4F36-467F-BF95-533C2D57C678}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4566CCE-0A47-4C56-8605-340D96E1E72F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4566CCE-0A47-4C56-8605-340D96E1E72F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4566CCE-0A47-4C56-8605-340D96E1E72F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4566CCE-0A47-4C56-8605-340D96E1E72F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8C957AA6-DB21-413D-A456-F13FA366B5D9} = {96BF7BD4-4C63-4E3F-8D28-F9825F490BBD}
+		{F4BE3734-4F36-467F-BF95-533C2D57C678} = {266D1957-7E09-44E3-BCFF-A11284B41C71}
+		{D4566CCE-0A47-4C56-8605-340D96E1E72F} = {266D1957-7E09-44E3-BCFF-A11284B41C71}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {813905A2-9E76-4704-B5FE-41D8F0D60483}

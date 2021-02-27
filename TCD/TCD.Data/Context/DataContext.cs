@@ -1,11 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TCD.API.Models;
+using System.Text;
+using TCD.Data.Models;
 
-namespace TCD.API.Data
+namespace TCD.Data.Context
 {
     public class DataContext : DbContext
     {

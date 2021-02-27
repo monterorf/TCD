@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using TCD.API.Data;
-using TCD.API.Models;
+using TCD.Data.Models;
+using TCD.Data.UnitOfWork;
 
 namespace TCD.API.Controllers
 {
@@ -13,48 +10,61 @@ namespace TCD.API.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IRepository<Product> _genericRepository;
+        #region Fields
+
         private readonly IUnitOfWork _unitOfWork;
 
-        public ProductsController(IRepository<Product> Repository, IUnitOfWork unitOfWork)
+        #endregion
+
+        #region Ctor
+
+        public ProductsController(IUnitOfWork unitOfWork)
         {
-            _genericRepository = Repository;
             _unitOfWork = unitOfWork;
         }
+            
+
+        #endregion
+
+        #region Methods
 
         [HttpGet]
         public async Task<IEnumerable<Product>> Get()
         {
-            return await _genericRepository.GetAsync();
+            return await _unitOfWork.GetRepository<Product>().GetAllAsync();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<Product> Get(int id)
+        {
+            return await _unitOfWork.GetRepository<Product>().GetAsync(id);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Product product)
+        public async Task<int> Create(Product product)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
+            await _unitOfWork.GetRepository<Product>().AddAsync(product);
 
-            var created = await _genericRepository.CreateAsync(product);
-
-            if (created)
-                _unitOfWork.Commit();
-
-            return Created("Created", new { Response = StatusCode(201) });
+            return await _unitOfWork.Save();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct(int id)
+        [HttpDelete]
+        public async Task<int> Delete(Product product)
         {
-            var deleted = await _genericRepository.Delete(id);
+            _unitOfWork.GetRepository<Product>().Delete(product);
 
-            if (deleted)
-                _unitOfWork.Commit();
-
-            return Ok();
-
+            return await _unitOfWork.Save();
         }
+
+        [HttpPut]
+        public async Task<int> UpdateDepartmentAsync(Product updateProduct)
+        {
+            _unitOfWork.GetRepository<Product>().Update(updateProduct);
+
+            return await _unitOfWork.Save();
+        }
+
+        #endregion
 
     }
 }

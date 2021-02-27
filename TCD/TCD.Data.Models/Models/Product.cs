@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TCD.API.Models
+namespace TCD.Data.Models
 {
     public class Product
     {

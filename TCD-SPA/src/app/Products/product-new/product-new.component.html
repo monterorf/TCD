@@ -1,0 +1,29 @@
+<div class="productFormContainer">
+    <form [formGroup]="productForm" (ngSubmit)="createProduct()">
+      <h2 class="text-center text-primary">New Product</h2>
+      <hr>  
+  
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text"         
+          class="form-control"  
+          formControlName="name"         
+          placeholder="Name">
+        <div class="text-danger" *ngIf="productForm.get('name').touched && productForm.get('name').hasError('required')">Please write a name</div>
+        <div class="text-danger" *ngIf="productForm.get('name').touched && productForm.get('name').hasError('maxlength')">Name should be max 50 characters</div>
+      </div>
+  
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text"         
+          class="form-control"  
+          formControlName="description"         
+          placeholder="Description">
+        <div class="text-danger" *ngIf="productForm.get('description').touched && productForm.get('description').hasError('maxlength')">Description should be max 100 characters</div>
+      </div>
+      
+      <button class="btn btn-success" [disabled]="!productForm.valid" type="submit">Create product</button>
+  
+    </form>
+  </div>
+  
