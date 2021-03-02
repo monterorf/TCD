@@ -30,12 +30,15 @@ namespace TCD.Data.Repositories
 
         #region Methods
 
-        public async Task<IEnumerable<T>> GetAllAsync() =>
-            await _dbSet.ToListAsync();
+        public async Task<IEnumerable<T>> GetAllAsync()
+        {
 
-        public async Task<T> GetAsync(int id) =>
-            await _dbSet.FindAsync(id);
-
+            return await _dbSet.ToListAsync();
+        }
+        public async Task<T> GetAsync(int id)
+        {
+            return await _dbSet.FindAsync(id);
+        }
         public async Task<IEnumerable<T>> GetWhereAsync(Expression<Func<T, bool>> predicate = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "")
         {
@@ -53,9 +56,11 @@ namespace TCD.Data.Repositories
             return await query.ToListAsync();
         }
 
-        public async Task AddAsync(T entity) =>
-            await _dbSet.AddAsync(entity);
+        public async Task AddAsync(T entity)
+        {
 
+            await _dbSet.AddAsync(entity);
+        }
         public void Update(T entity)
         {
             _dbSet.Attach(entity);

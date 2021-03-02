@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using TCD.Data.Models.Models;
 
 namespace TCD.Data.Models
 {
@@ -8,5 +9,8 @@ namespace TCD.Data.Models
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }
+        public Category category { get; set; }
+        [Required]
+        public int CategoryId { get; set; }
     }
 }

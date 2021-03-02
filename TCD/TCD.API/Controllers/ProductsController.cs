@@ -6,9 +6,7 @@ using TCD.Data.UnitOfWork;
 
 namespace TCD.API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProductsController : ControllerBase
+    public class ProductsController : BaseController
     {
         #region Fields
 
@@ -22,7 +20,7 @@ namespace TCD.API.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-            
+
 
         #endregion
 
@@ -48,12 +46,16 @@ namespace TCD.API.Controllers
             return await _unitOfWork.Save();
         }
 
-        [HttpDelete]
-        public async Task<int> Delete(Product product)
+        [HttpDelete("{id}")]
+        public async Task<int> Delete(int id)
+
         {
-            _unitOfWork.GetRepository<Product>().Delete(product);
+            var ProductFromRepo = await _unitOfWork.GetRepository<Product>().GetAsync(id);
+
+            _unitOfWork.GetRepository<Product>().Delete(ProductFromRepo);
 
             return await _unitOfWork.Save();
+            
         }
 
         [HttpPut]
