@@ -6,10 +6,12 @@ import { ProductEditComponent } from './Products/product-edit/product-edit.compo
 import { CategoryListComponent } from './Products/category-list/category-list.component';
 import { CategoryNewComponent } from './Products/category-new/category-new.component';
 import { CategoryEditComponent } from './Products/category-edit/category-edit.component';
+import { StoreListComponent } from './Stores/store-list/store-list.component';
 
 const routes: Routes = [
   { path: 'home', component: ProductListComponent },
   { path: 'categories', component: CategoryListComponent },
+  { path: 'stores', component: StoreListComponent },
   { path: 'category-new', component: CategoryNewComponent },
   { path: 'category-edit/:id', component: CategoryEditComponent },
   { path: 'product-new', component: ProductNewComponent },

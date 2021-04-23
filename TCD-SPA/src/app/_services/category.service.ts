@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Product } from '../_models/product';
 import { Category } from '../_models/Category';
 
 @Injectable({
@@ -29,6 +28,6 @@ baseUrl = 'https://localhost:44348/api/Categories/'
     }
 
     editCategory(category: Category) {  
-      return this.http.put<Product>(this.baseUrl, category);
+      return this.http.put<Category>(this.baseUrl, category);
     }
 }

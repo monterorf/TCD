@@ -1,0 +1,31 @@
+<div class="container">
+    <a [routerLink]="['/category-new']"><button type="button" class="btn btn-primary mb-3">New Store</button></a> 
+    <div *ngIf="stores?.length === 0">
+      <p>No categories yet... click on new product to add one!</p>
+    </div>  
+    <table class="table" *ngIf="stores?.length > 0">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Addess</th>
+          <th scope="col">Phone Number</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let store of stores">
+        <tr>
+          <th scope="row">{{store.id}}</th>
+          <td>{{store.name}}</td>
+          <td>{{store.address}}</td>
+          <td>{{store.phone}}</td>          
+          <td>  
+            <a [routerLink]="['/category-edit', store.id]">
+              <button class="btn"><i class="fa fa-edit"></i> </button>          
+            </a>            
+            <button class="btn" (click)="deleteStore(store.id)"><i class="fa fa-trash-o"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+  </div>

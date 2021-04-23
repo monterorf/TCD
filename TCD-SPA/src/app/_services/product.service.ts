@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProductService {
 baseUrl = 'https://localhost:44348/api/Products/'
     products: Product[];
