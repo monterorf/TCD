@@ -10,5 +10,7 @@ namespace TCD.Data.Context
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; } 
         public DbSet<Store> Stores { get; set; }
+        public DbSet<StoreProduct> StoreProducts { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

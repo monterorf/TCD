@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace TCD.API.Controllers
         #endregion
 
         #region Methods
-
+        [Authorize]
         [HttpGet]
         public async Task<IEnumerable<Category>> Get()
         {
@@ -48,7 +49,7 @@ namespace TCD.API.Controllers
 
             return await _unitOfWork.Save();
         }
-
+        
         [HttpDelete("{id}")]
         public async Task<int> Delete(int id)
 

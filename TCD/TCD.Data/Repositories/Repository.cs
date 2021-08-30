@@ -39,6 +39,7 @@ namespace TCD.Data.Repositories
         {
             return await _dbSet.FindAsync(id);
         }
+
         public async Task<IEnumerable<T>> GetWhereAsync(Expression<Func<T, bool>> predicate = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "")
         {
@@ -96,6 +97,11 @@ namespace TCD.Data.Repositories
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public async Task<T> Find(Expression<Func<T, bool>> predicate = null)
+        {
+            return await _dbSet.SingleOrDefaultAsync(predicate);
         }
 
         #endregion

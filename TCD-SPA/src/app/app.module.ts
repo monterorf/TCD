@@ -18,6 +18,7 @@ import { CategoryNewComponent } from './Products/category-new/category-new.compo
 import { CategoryEditComponent } from './Products/category-edit/category-edit.component';
 import { NavComponent } from './nav/nav.component';
 import { StoreListComponent } from './Stores/store-list/store-list.component';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { StoreListComponent } from './Stores/store-list/store-list.component';
     CategoryNewComponent,
     CategoryEditComponent,
     NavComponent,
-    StoreListComponent
+    StoreListComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

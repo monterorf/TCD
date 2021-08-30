@@ -7,16 +7,27 @@ import { CategoryListComponent } from './Products/category-list/category-list.co
 import { CategoryNewComponent } from './Products/category-new/category-new.component';
 import { CategoryEditComponent } from './Products/category-edit/category-edit.component';
 import { StoreListComponent } from './Stores/store-list/store-list.component';
+import { RegisterComponent } from './register/register.component';
+import { AuthGuard } from './_guards/auth.guard';
+import { fromEventPattern } from 'rxjs';
 
 const routes: Routes = [
-  { path: 'home', component: ProductListComponent },
-  { path: 'categories', component: CategoryListComponent },
-  { path: 'stores', component: StoreListComponent },
-  { path: 'category-new', component: CategoryNewComponent },
-  { path: 'category-edit/:id', component: CategoryEditComponent },
-  { path: 'product-new', component: ProductNewComponent },
-  { path: 'product-edit/:id', component: ProductEditComponent },
-  { path: '**', redirectTo: 'home', pathMatch: 'full' }
+  { path: 'register', component: RegisterComponent },
+  { path: '',
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'home', component: ProductListComponent },
+      { path: 'categories', component: CategoryListComponent },
+      { path: 'stores', component: StoreListComponent, canActivate: [AuthGuard] },
+      { path: 'category-new', component: CategoryNewComponent },
+      { path: 'category-edit/:id', component: CategoryEditComponent },
+      { path: 'product-new', component: ProductNewComponent },
+      { path: 'product-edit/:id', component: ProductEditComponent },      
+    ]
+ },
+ { path: '**', redirectTo: 'home', pathMatch: 'full' }
+  
 ];
 
 @NgModule({
