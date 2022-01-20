@@ -10,18 +10,27 @@ import { UserService } from '../_services/user.service';
 export class NavComponent implements OnInit {
   model: any = {};
   constructor(private userService:UserService) { }
+  loggedIn: boolean;
 
   ngOnInit(): void {
-    
+    this.getCurrentUser();
   }
 
-  loggedIn()  {
-    return false;
-  }
+  // loggedIn()  {
+  //   return false;
+  // }
 
   login() {
-    this.userService.login(this.model).subscribe(next => {
-      console.log("logged succesfully")
+    this.userService.login(this.model).subscribe(response => {
+      
+    })
+  }
+
+  getCurrentUser() {
+    this.userService.currentUser$.subscribe(user => {
+      this.loggedIn = !!user
+    }, error => {
+      console.log(error)
     })
   }
 

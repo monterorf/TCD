@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../_models/User';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { ReplaySubject } from 'rxjs';
 
 
 @Injectable({
@@ -10,6 +11,9 @@ import { map } from 'rxjs/operators';
 export class UserService {
   baseUrl = 'https://localhost:44348/api/account/'
   users: User[];
+
+  private currentUserSource = new ReplaySubject<User>(1);
+  currentUser$ = this.currentUserSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -24,14 +28,23 @@ export class UserService {
   login(user: User) {
     return this.http.post(this.baseUrl + 'login', user)
       .pipe(
-        map((response:any) => {
-          const user = response;
-          console.log(response);
-          localStorage.setItem('isLoged', 'true');
-          localStorage.setItem('user',JSON.stringify(user));
-          
+        map((response:User) => {
+          const user = response;          
+          if (user) {
+            localStorage.setItem('user',JSON.stringify(user));            
+            this.currentUserSource.next(user);
+          }          
         })
       )
+  }
+
+  setCurrentUser(user: User) {
+    this.currentUserSource.next(user);
+  }
+
+  logout() {
+    localStorage.removeItem('user');
+    this.setCurrentUser(null)
   }
   
   addUser(user: User) {
