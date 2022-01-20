@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TCD.Data.Repositories;
@@ -25,6 +26,11 @@ namespace TCD.Tests
         }
 
         public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<T> Find(Expression<Func<T, bool>> predicate = null)
         {
             throw new NotImplementedException();
         }
