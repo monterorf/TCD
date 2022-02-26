@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../_models/User';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { ReplaySubject } from 'rxjs';
 
 
 @Injectable({
@@ -10,6 +11,8 @@ import { map } from 'rxjs/operators';
 export class UserService {
   baseUrl = 'https://localhost:44348/api/account/'
   users: User[];
+  private currentUserSource = new ReplaySubject<User>(1);
+  currentUser$ = this.currentUserSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -29,7 +32,7 @@ export class UserService {
           console.log(response);
           localStorage.setItem('isLoged', 'true');
           localStorage.setItem('user',JSON.stringify(user));
-          
+          this.currentUserSource.next(user);
         })
       )
   }
@@ -39,6 +42,7 @@ export class UserService {
   }
 
   loggedIn() {
+    console.log("Entró al loggedIn");
     return localStorage.getItem('isLoged');
   }
   

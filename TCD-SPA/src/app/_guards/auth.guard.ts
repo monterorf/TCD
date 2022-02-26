@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { UserService } from '../_services/user.service';
 
 @Injectable({
@@ -9,11 +10,12 @@ import { UserService } from '../_services/user.service';
 export class AuthGuard implements CanActivate {
 constructor(private userService: UserService) {}
 
-  canActivate(): boolean {
-    if(this.userService.loggedIn())
-      return true;
-      console.log("You should no pass")
-      return false;
+  canActivate(): Observable<boolean> {
+    return this.userService.currentUser$.pipe(
+      map(user => {
+        if (user) return true
+      })
+    )
   }
   
 }
