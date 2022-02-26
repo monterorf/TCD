@@ -14,8 +14,6 @@ export class UserService {
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
-  private currentUserSource = new ReplaySubject<User>(1);
-  currentUser$ = this.currentUserSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
