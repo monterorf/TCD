@@ -1,6 +1,7 @@
 .vscode
 bin
 obj
+.vs
 
 appsettings.json
 

@@ -27,7 +27,6 @@ export class RegisterComponent implements OnInit {
   }
 
   createUser() {
-    console.log("entro")
     this.user = Object.assign({}, this.userForm.value);
     this.userService.addUser(this.user).subscribe(() => {
       console.log('User has been created successfully');

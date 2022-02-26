@@ -12,8 +12,9 @@ import { AuthGuard } from './_guards/auth.guard';
 import { fromEventPattern } from 'rxjs';
 
 const routes: Routes = [
-  { path: 'register', component: RegisterComponent },
-  { path: '',
+  { path: '', component: RegisterComponent },
+  { 
+    path: '',
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [

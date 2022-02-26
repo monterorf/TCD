@@ -11,6 +11,8 @@ import { ReplaySubject } from 'rxjs';
 export class UserService {
   baseUrl = 'https://localhost:44348/api/account/'
   users: User[];
+  private currentUserSource = new ReplaySubject<User>(1);
+  currentUser$ = this.currentUserSource.asObservable();
 
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
@@ -28,12 +30,12 @@ export class UserService {
   login(user: User) {
     return this.http.post(this.baseUrl + 'login', user)
       .pipe(
-        map((response:User) => {
-          const user = response;          
-          if (user) {
-            localStorage.setItem('user',JSON.stringify(user));            
-            this.currentUserSource.next(user);
-          }          
+        map((response:any) => {
+          const user = response;
+          console.log(response);
+          localStorage.setItem('isLoged', 'true');
+          localStorage.setItem('user',JSON.stringify(user));
+          this.currentUserSource.next(user);
         })
       )
   }
@@ -48,10 +50,11 @@ export class UserService {
   }
   
   addUser(user: User) {
-    return this.http.post(this.baseUrl, user);
+    return this.http.post(this.baseUrl + 'register', user);
   }
 
   loggedIn() {
+    console.log("Entró al loggedIn");
     return localStorage.getItem('isLoged');
   }
   
