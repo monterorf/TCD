@@ -13,7 +13,10 @@ constructor(private userService: UserService) {}
   canActivate(): Observable<boolean> {
     return this.userService.currentUser$.pipe(
       map(user => {
-        if (user) return true
+        if (user) {
+          console.log("Entró al guard")
+          return true
+        }
       })
     )
   }

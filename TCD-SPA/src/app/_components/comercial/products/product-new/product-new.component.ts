@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder, ValidatorFn, AbstractControl } from '@angular/forms';
-import { ProductService } from 'src/app/_services/product.service';
-import { Product } from 'src/app/_models/product';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CategoryService } from 'src/app/_services/category.service';
 import { Category } from 'src/app/_models/Category';
+import { Product } from 'src/app/_models/Product';
+import { CategoryService } from 'src/app/_services/category.service';
+import { ProductService } from 'src/app/_services/product.service';
 
 @Component({
   selector: 'app-product-new',
@@ -12,6 +12,7 @@ import { Category } from 'src/app/_models/Category';
   styleUrls: ['./product-new.component.css']
 })
 export class ProductNewComponent implements OnInit {
+
   product: Product;
   categories: Category[];
   productForm: FormGroup;
@@ -45,8 +46,9 @@ export class ProductNewComponent implements OnInit {
         console.log('There has been an issue creating the product');
     });
 
-    this.router.navigate(['home']).then(() => {
+    this.router.navigate(['comercial/products']).then(() => {
       window.location.reload();
     });
   }
+
 }

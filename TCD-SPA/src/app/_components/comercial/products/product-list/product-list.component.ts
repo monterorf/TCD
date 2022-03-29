@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Product } from '../../_models/product';
 import { HttpClient } from '@angular/common/http';
-import { ProductService } from '../../_services/product.service';
+import { Component, OnInit } from '@angular/core';
+import { Product } from './../../../../_models/Product';
+import { ProductService } from './../../../../_services/product.service';
 
 @Component({
   selector: 'app-product-list',
@@ -9,6 +9,7 @@ import { ProductService } from '../../_services/product.service';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
+
   products: Product[];
 
   constructor(private http: HttpClient, private productService: ProductService) { }

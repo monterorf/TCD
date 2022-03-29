@@ -29,7 +29,7 @@ namespace TCD.API.Controllers
         #endregion
 
         #region Methods
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public async Task<IEnumerable<Category>> Get()
         {

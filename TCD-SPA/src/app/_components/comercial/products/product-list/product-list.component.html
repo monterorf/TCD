@@ -1,5 +1,5 @@
 <div class="container">
-    <a [routerLink]="['/product-new']"><button type="button" class="btn btn-primary mb-3">New product</button></a> 
+    <a [routerLink]="['./product-new']"><button type="button" class="btn btn-primary mb-3">New product</button></a> 
     <div *ngIf="products?.length === 0">
       <p>No products yet... click on new product to add one!</p>
     </div>  
@@ -18,7 +18,7 @@
           <td>{{product.name}}</td>
           <td>{{product.description}}</td>          
           <td>  
-            <a [routerLink]="['/product-edit', product.id]">
+            <a [routerLink]="['../product-edit/', product.id]">
               <button class="btn"><i class="fa fa-edit"></i> </button>          
             </a>            
             <button class="btn" (click)="deleteProduct(product.id)"><i class="fa fa-trash-o"></i></button>

@@ -29,6 +29,7 @@ export class CategoryEditComponent implements OnInit {
 
 
   loadCategory(id: number) {    
+    console.log("From loadCategory", id)
     this.categoryService.getCategory(id).subscribe((category: Category) => {      
       this.category = category;
     });       
