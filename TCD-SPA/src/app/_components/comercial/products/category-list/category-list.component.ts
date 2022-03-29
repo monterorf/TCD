@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from 'src/app/_models/Category';
-import { CategoryService } from 'src/app/_services/category.service';
+import { Router } from '@angular/router';
+import { Category } from './../../../../_models/Category';
+import { CategoryService } from './../../../../_services/category.service';
 
 @Component({
   selector: 'app-category-list',
@@ -8,6 +9,7 @@ import { CategoryService } from 'src/app/_services/category.service';
   styleUrls: ['./category-list.component.css']
 })
 export class CategoryListComponent implements OnInit {
+
   categories: Category[];
   constructor(private categoryService:CategoryService) { }
 
@@ -28,5 +30,4 @@ export class CategoryListComponent implements OnInit {
         console.log(error);
       });    
   }
-
 }

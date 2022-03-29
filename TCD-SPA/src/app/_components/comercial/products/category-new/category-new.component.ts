@@ -34,8 +34,9 @@ export class CategoryNewComponent implements OnInit {
         console.log('There has been an issue creating the category');
     });
 
-    this.router.navigate(['categories']).then(() => {
+    this.router.navigate(['comercial/products/categories']).then(() => {
       window.location.reload();
     });
   }
+
 }

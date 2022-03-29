@@ -1,5 +1,5 @@
 <div class="container">
-    <a [routerLink]="['/category-new']"><button type="button" class="btn btn-primary mb-3">New category</button></a> 
+    <a [routerLink]="['../category-new']"><button type="button" class="btn btn-primary mb-3">New category</button></a> 
     <div *ngIf="categories?.length === 0">
       <p>No categories yet... click on new product to add one!</p>
     </div>  
@@ -18,7 +18,7 @@
           <td>{{category.name}}</td>
           <td>{{category.description}}</td>          
           <td>  
-            <a [routerLink]="['/category-edit', category.id]">
+            <a [routerLink]="['../category-edit/', category.id]">
               <button class="btn"><i class="fa fa-edit"></i> </button>          
             </a>            
             <button class="btn" (click)="deleteCategory(category.id)"><i class="fa fa-trash-o"></i></button>
